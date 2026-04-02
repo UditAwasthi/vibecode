@@ -4,10 +4,10 @@ import { signIn } from "next-auth/react";
 import { motion } from "motion/react";
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 
-// Spring configuration for that "snappy yet smooth" feel
  const springConfig = { type: "spring", stiffness: 300, damping: 30 } as const;
 
 export default function Home() {
+  
   return (
     <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background text-foreground selection:bg-primary/10">
       
@@ -68,7 +68,7 @@ export default function Home() {
               transition={{ ...springConfig, delay: provider.delay }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => signIn(provider.id)}
+              onClick={() => signIn(provider.id, { callbackUrl: "/dashboard" })}
               className="group relative flex items-center justify-between overflow-hidden rounded-2xl border border-border bg-card/50 px-6 py-4 backdrop-blur-md transition-colors hover:border-primary/40 hover:bg-card"
             >
               {/* Subtle sweeping light on hover */}
