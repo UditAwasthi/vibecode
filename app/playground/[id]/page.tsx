@@ -1,3 +1,5 @@
+import PlaygroundClient from "./PlaygroundClient";
+
 export default async function PlaygroundPage({
   params,
 }: {
@@ -5,16 +7,13 @@ export default async function PlaygroundPage({
 }) {
   const { id } = await params;
 
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/file/${id}`);
+  const host = "http://localhost:3000"; // temporary
+
+  const res = await fetch(`${host}/api/file/${id}`, {
+    cache: "no-store",
+  });
+
   const files = await res.json();
 
-  return (
-    <div className="p-6 text-white">
-      <h1 className="mb-6">Project: {id}</h1>
-
-      <pre className="text-xs">
-        {JSON.stringify(files, null, 2)}
-      </pre>
-    </div>
-  );
+  return <PlaygroundClient files={files} projectId={id} />;
 }
