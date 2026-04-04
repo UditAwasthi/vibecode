@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import PlaygroundClient from "./PlaygroundClient";
 
 export default async function PlaygroundPage({
@@ -7,7 +8,7 @@ export default async function PlaygroundPage({
 }) {
   const { id } = await params;
 
-  const host = "http://localhost:3000"; // temporary
+  const host = process.env.NEXT_PUBLIC_VERCEL_URL; 
 
   const res = await fetch(`${host}/api/file/${id}`, {
     cache: "no-store",
